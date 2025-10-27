@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+::-webkit-scrollbar{
+  border:none;
+  width:0px;
+}
