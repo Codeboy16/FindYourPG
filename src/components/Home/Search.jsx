@@ -5,16 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useEffect } from 'react';
 import Link from "next/link";
 export default function SearchExplore() {
-  // Initialize react-hook-form
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
-
-  // On form submit
-
   const onSubmit = ({ location, budget }) => {
-    console.log("Searching for:", { location, budget });
-    //  <Link href={`/search?location=${location}&budget=${budget}`}/>;
-     
-    // You can perform your PG search logic here
+    //  <Link href={`/findpg/search?location=${location}&budget=${budget}`}/>;
+       window.location.href = `/findpg/search?location=${location}&budget=${budget}`
   };
 
   // Show toast for errors only on submit

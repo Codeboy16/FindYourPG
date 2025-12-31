@@ -21,7 +21,7 @@ const PGListing = ({
           <img
             src={image}
             alt={`PG Listing for ${name}`} // Accessible alt text
-            className="object-fit w-full max-h-60 rounded-tl-xl rounded-tr-xl"
+            className="object-fit w-full  max-h-60 rounded-tl-xl rounded-tr-xl"
           />
           <div
             className={`absolute top-0 right-0 ${
@@ -33,8 +33,8 @@ const PGListing = ({
         </div>
 
         <div className="p-6 pt-3  space-y-3">
-          <h3 className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
-            {name}
+          <h3 className="text-xl text-left font-bold text-gray-800 hover:text-blue-600 transition-colors">
+            {name.length>30 ? name.substring(0,30)+"...":name}
           </h3>
           <p className="text-md font-bold text-gray-600 flex items-center gap-1 ">
             <FiMapPin className="text-lg text-red-600 " />

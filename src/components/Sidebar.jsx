@@ -6,7 +6,7 @@ import { MdOutlineHotel } from 'react-icons/md';
 
 const Sidebar = () => {
   return (
-    <aside className="w-full md:w-[35rem] h-1/2 bg-white p-6 rounded-2xl shadow-xl space-y-6">
+    <aside className="w-full md:w-[30rem] h-fit bg-white p-6 mt-10 rounded-2xl shadow-xl space-y-6">
       <h2 className="text-2xl font-bold text-blue-900">Filters</h2>
 
       {/* Price Range */}

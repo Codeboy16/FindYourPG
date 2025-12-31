@@ -1,73 +1,45 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import PGListing from "../PgListing";
+import axios from "axios";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 const PGsNearColleges = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [bestPgData, setBestPgData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // New state to manage loading
 
-  const pgListings = [
-    {
-      name: "Budget PG near Metro Station",
-      location: "Gangtok",
-      price: 6000,
-      rating: 5,
-      gender: 1,
-      gpsLocation: "Gangtok",
-      contactLink: 123456789,
-      image: "/room1.jpeg"
-    },
-    {
-      name: "Luxury PG in Heart of City",
-      location: "Gangtok",
-      price: 12000,
-      rating: 4.5,
-      gender: 0,
-      gpsLocation: "Gangtok",
-      contactLink: 123456789,
-      image: "/room2.jpg"
-    },
-    {
-      name: "Budget PG near Metro Station",
-      location: "Gangtok",
-      price: 6000,
-      rating: 5,
-      gender: 1,
-      gpsLocation: "Gangtok",
-      contactLink: 123456789,
-      image: "/room1.jpeg"
-    },
-    {
-      name: "Comfort PG with Kitchen Facilities",
-      location: "Gangtok",
-      price: 7500,
-      rating: 4.8,
-      gender: 0,
-      gpsLocation: "Gangtok",
-      contactLink: 123456789,
-      image: "/room2.jpg"
-    },
-    {
-      name: "Cozy PG with Study Areas",
-      location: "Gangtok",
-      price: 5000,
-      rating: 4,
-      gender: 1,
-      gpsLocation: "Gangtok",
-      contactLink: 123456789,
-      image: "/room1.jpeg"
-    }
-  ];
+  useEffect(() => {
+    const fetchPGData = async () => {
+      try {
+        const response = await axios.get(
+          `https://findyourpg.onrender.com/findPg/topBestPg`
+        );
+        setBestPgData(response.data); // Set data if successful
+        setIsLoading(false); // Set loading to false after data is fetched
+        console.log(response.data); // Optional log
+      } catch (error) {
+        console.log("Error:", error.message); // Log the actual error message
+        setIsLoading(false); // Set loading to false if there's an error
+      }
+    };
+
+    fetchPGData();
+  }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % (pgListings.length - 2)); // Wrap around when there are only 3 listings left
+    setCurrentIndex((prevIndex) =>
+      prevIndex + 3 < bestPgData.length ? prevIndex + 3 : 0
+    ); // Ensure index doesn't exceed length
   };
 
   const prevSlide = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + pgListings.length - 2) % (pgListings.length - 2)
+      (prevIndex) =>
+        prevIndex - 3 >= 0 ? prevIndex - 3 : bestPgData.length - 3 // Handle previous slide
     );
   };
 
@@ -89,19 +61,27 @@ const PGsNearColleges = () => {
             animate={{ x: -currentIndex * 100 + "%" }}
             transition={{ duration: 0.5 }}
           >
-            {pgListings.slice(currentIndex, currentIndex + 3).map((pg, idx) => (
-              <PGListing
-                key={idx}
-                name={pg.name}
-                location={pg.location}
-                price={pg.price}
-                rating={pg.rating}
-                gender={pg.gender}
-                gpsLocation={pg.gpsLocation}
-                contactLink={pg.contactLink}
-                image={pg.image}
-              />
-            ))}
+            {/* Loading Skeletons (only show when loading) */}
+            {isLoading ? (
+              Array.from({ length: 3 }).map((_, idx) => (
+                <LoadingSkeleton key={idx} />
+              ))
+            ) : (
+              // Render actual PG data when it's fetched
+              bestPgData.slice(currentIndex, currentIndex + 3).map((pg, idx) => (
+                <PGListing
+                  key={idx}
+                  name={pg.pgName}
+                  location={pg.address}
+                  price={pg.price}
+                  rating={pg.rating}
+                  gender={pg.pgType}
+                  gpsLocation={pg.map}
+                  contactLink={pg.contactLink}
+                  image={`https://findyourpg.onrender.com/${pg.image}`}
+                />
+              ))
+            )}
           </motion.div>
 
           {/* Navigation Buttons */}
