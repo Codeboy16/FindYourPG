@@ -17,6 +17,7 @@ const SearchPg = () => {
   const [userBudget, setUserBudget] = useState(budget || 2000);
 
   // Fetching PG data when location or budget changes
+    useEffect(() => {
   const fetchPGData = async () => {
     try {
       const response = await fetch(
@@ -29,7 +30,7 @@ const SearchPg = () => {
       console.log("Error fetching PG data", error);
     }
   };
-  useEffect(() => {
+
     fetchPGData();
   }, [userLocation, userBudget]);
 
