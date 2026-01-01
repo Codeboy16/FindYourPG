@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense} from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import PGListing from "@/components/PgListing";
 import Navbar from "@/components/Navbar";
@@ -43,7 +43,7 @@ const SearchPg = () => {
   };
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-24 px-4 ">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
@@ -100,7 +100,7 @@ const SearchPg = () => {
                 rating={pg.rating}
                 gender={pg.pgType}
                 gpsLocation={pg.map}
-                contactLink={pg.contactLink}
+                contactLink={pg.contact}
                 image={`https://findyourpg.onrender.com/${pg.image}`}
               />
             ))}
@@ -110,7 +110,7 @@ const SearchPg = () => {
         )}
       </div>
       <Footer />
-    </>
+      </Suspense>
   );
 };
 

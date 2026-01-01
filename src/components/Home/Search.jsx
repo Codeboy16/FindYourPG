@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { FiSearch } from "react-icons/fi";
 import { ToastContainer, toast } from 'react-toastify';
-import { useEffect } from 'react';
+import { useEffect,Suspense } from 'react';
 import Link from "next/link";
 export default function SearchExplore() {
   const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
@@ -25,6 +25,7 @@ export default function SearchExplore() {
   }, [onSubmit]);
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <section className="py-20 border-t border-gray-300">
       <div className="max-w-7xl mx-auto px-6 text-center space-y-6">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -72,5 +73,6 @@ export default function SearchExplore() {
         <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
       </div>
     </section>
+    </Suspense>
   );
 }

@@ -20,7 +20,7 @@ const PGListing = ({
         <div className="relative h-60 w-full">
           <img
             src={image}
-            alt={`PG Listing for ${name}`} // Accessible alt text
+            alt={`Image of ${name} PG, located at ${location}`} // Accessible alt text
             className="object-fit w-full  max-h-60 rounded-tl-xl rounded-tr-xl"
           />
           <div
@@ -73,10 +73,10 @@ const PGListing = ({
             )}
 
             <div className="">
-              <a
-                href={contactLink}
-                target="_blank"
-                rel="noopener noreferrer"
+<a
+  href={contactLink}
+  target="_blank"
+  rel="noopener noreferrer"
                 className="flex items-center justify-center w-full bg-blue-600 text-white hover:bg-blue-700 transition-all py-2 rounded-lg font-semibold px-2 md:px-5"
               >
                 <BiPhoneCall className="mr-2 my-auto font-bold" />

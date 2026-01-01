@@ -44,16 +44,16 @@ const FindPGPage = () => {
             <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 2xl:grid 2xl:grid-cols-3 gap-2">
               {pgData ?(
                 pgData.map((pg, index) => (
-                  <Link href={`/findpg/${pg.id}`} key={index}>
+                  <Link href={`/findpg/${pg.id}`} key={index} passHref>
                   <PGListing
-                    key={index}
+                    // key={index}
                     name={pg.pgName}
                     location={pg.address}
                     price={pg.price}
                     rating={pg.rating}
                     gender={pg.pgType}
                     gpsLocation={pg.map}
-                    contactLink={pg.contactLink}
+                    contactLink={pg.contact}
                     image={`https://findyourpg.onrender.com/${pg.image}`}
                   />
                    </Link>
