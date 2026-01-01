@@ -25,7 +25,7 @@ export default function SearchExplore() {
   }, [onSubmit]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
     <section className="py-20 border-t border-gray-300">
       <div className="max-w-7xl mx-auto px-6 text-center space-y-6">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
