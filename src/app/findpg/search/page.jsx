@@ -43,7 +43,7 @@ const SearchPg = () => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense >
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-24 px-4 ">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
